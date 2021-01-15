@@ -31,6 +31,7 @@
     "react-text-mask": "^5.4.3",
     "react-webcam": "^5.2.0",
     "styled-components": "^5.1.0",
+    "use-mask-input": "^1.0.2",
     "use-mobile-detect-hook": "^1.0.3"
   },
   "scripts": {

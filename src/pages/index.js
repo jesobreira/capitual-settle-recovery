@@ -91,7 +91,7 @@ function WithdrawalConfirm() {
 
               <Row>
                 <div>
-                  <p>Agência</p>
+                  <p>Agência (sem dígito)</p>
                   <input
                     type="text"
                     value={agency}

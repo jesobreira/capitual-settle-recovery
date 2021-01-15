@@ -55,10 +55,9 @@ export default function ConfirmWithdrawal() {
 
             <h1>Ordem de Saque Solicitada</h1>
 
-            <p>Por segurança, o saque tem o prazo máximo de 24 horas.</p>
+            <p>Seu saque será reprocessado dentro do expediente bancário.</p>
             <p>
-              Uma vez realizada o saque, seus fundos estarão disponíveis em sua
-              conta bancária.
+              Caso seu saque retorne mais uma vez, você será notificado por e-mail, novamente.
             </p>
             <p>Atenciosamente, Equipe do Capitual.</p>
 
