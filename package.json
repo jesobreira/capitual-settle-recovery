@@ -42,8 +42,8 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build && cp build/index.html build/404.html",
-    "deploy": "echo sandbox.capitu.al>build/CNAME && gh-pages -d build",
-    "just-deploy": "cp build/index.html build/404.html && echo sandbox.capitu.al>build/CNAME && gh-pages -d build"
+    "deploy": "echo settle.capitu.al>build/CNAME && gh-pages -d build",
+    "just-deploy": "cp build/index.html build/404.html && echo settle.capitu.al>build/CNAME && gh-pages -d build"
   },
   "browserslist": {
     "production": [
