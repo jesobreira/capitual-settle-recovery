@@ -55,6 +55,8 @@ function Bounces() {
         } else {
           history.push('/' + partner + '/bounce_ok')
         }
+      }).catch(() => {
+        history.push('/' + partner + '/bounce_ok')
       })
 
     axios.get('/banklist').then(res => {
@@ -80,7 +82,8 @@ function Bounces() {
         axios.post('/bounce/' + order + '/' + token, {
             branch: agency,
             account,
-            bankIspb: bank.value
+            bankIspb: bank.value,
+            accountType
           }).then(res => {
           history.push('/' + partner + '/bounce_ok')
         })
