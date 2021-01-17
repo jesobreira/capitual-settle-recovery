@@ -105,12 +105,12 @@ function Bounces() {
                 </a>
               </li>
               <li>
-                <a href="https://help.capitual.com/settle/faq" target="_blank">
+                <a href="https://ajuda.capitual.io/faq/" target="_blank">
                   FAQ
                 </a>
               </li>
               <li>
-                <a href="https://help.capitual.com/settle" target="_blank">
+                <a href="https://help.capitual.com/" target="_blank">
                   Ajuda
                 </a>
               </li>
@@ -133,14 +133,18 @@ function Bounces() {
               <p>Preencha os campos abaixo com suas informações bancárias.</p>
 
               <Form onSubmit={() => {}} enctype="multipart/form-data">
-                <p>Nome</p>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  disabled
-                />
+              { Boolean(name) && 
+                <>
+                  <p>Nome</p>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    disabled
+                  />
+                </>
+              }
 
                 <p>Banco Destino</p>
                 <Select
