@@ -69,7 +69,7 @@ export default createGlobalStyle`
 
   ._loading_overlay_overlay {
     background: rgba(255, 255, 255, 0.7);
-    width: 101%;
+    width: 102%;
   }
 
   ._loading_overlay_spinner {

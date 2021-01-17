@@ -53,15 +53,13 @@ export default function ConfirmWithdrawal() {
           <BoxContainer>
             <img src={OrdemSaque} alt="ordem de saque" />
 
-            <h1>Ordem de Saque Solicitada</h1>
+            <h1>Reprocessamento de Saque Solicitado</h1>
 
             <p>Seu saque será reprocessado dentro do expediente bancário.</p>
             <p>
               Caso seu saque retorne mais uma vez, você será notificado por e-mail, novamente.
             </p>
             <p>Atenciosamente, Equipe do Capitual.</p>
-
-            <Button onClick={() => {}}>Confirmar</Button>
           </BoxContainer>
         </Box>
       </Body>

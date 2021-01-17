@@ -8,4 +8,4 @@ if (window.location.host.includes("binance"))
 else
 	PartnerLogo = SandboxLogo
 
-export default PartnerLogo
+export default BinanceLogo
