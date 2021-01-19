@@ -11,20 +11,22 @@ import {
   Form,
   Row,
   Button,
+  Footer,
 } from "~/styles/withdrawalconfirm";
-import LoadingOverlay from "react-loading-overlay"
-import axios from "~/services/axios"
-import { useParams, useHistory } from 'react-router-dom'
+import LoadingOverlay from "react-loading-overlay";
+import axios from "~/services/axios";
+import { useParams, useHistory } from "react-router-dom";
 
-import Logo from "~/images/capitual.png";
+import Logo from "~/images/logo-capitual.png";
 import PartnerLogo from "~/util/PartnerLogo";
-import Select from 'react-select'
+import Select from "react-select";
 
-import alertify from 'alertify.js'
+import alertify from "alertify.js";
+import colors from "~/styles/colors";
 
 function Bounces() {
-  const { partner, order, token } = useParams()
-  const history = useHistory()
+  const { partner, order, token } = useParams();
+  const history = useHistory();
 
   const [value, setValue] = useState("");
   const [bank, setBank] = useState("");
@@ -34,10 +36,9 @@ function Bounces() {
   const [cpf, setCpf] = useState("");
   const [accountType, setAccountType] = useState("checking");
 
-  const [banks, setBanks] = useState([])
+  const [banks, setBanks] = useState([]);
 
-  const [loading, setLoading] = useState(true)
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get('/bounce/' + order + '/' + token).then(res => {
@@ -73,30 +74,39 @@ function Bounces() {
 
   const handleSubmit = () => {
     alertify
-    .okBtn("Sim, processe o saque")
-    .cancelBtn("Não, desejo conferir")
-    .confirm("Caso os dados inseridos estejam inválidos novamente, será necessário aguardar uma nova tentativa e um eventual reembolso do banco destino para efetuar uma nova correção.\nVocê tem certeza que deseja processar seu saque para os dados informados?")
-    .then(resp => {
-      if (resp.buttonClicked === 'ok') {
-        setLoading(true)
-        axios.post('/bounce/' + order + '/' + token, {
-            branch: agency,
-            account,
-            bankIspb: bank.value,
-            accountType
-          }).then(res => {
-          history.push('/' + partner + '/bounce_ok')
-        })
-      }
-      })
-  }
+      .okBtn("Sim, processe o saque")
+      .cancelBtn("Não, desejo conferir")
+      .confirm(
+        "<p class='title'>ATENÇÃO</p><p>Caso os dados inseridos estejam inválidos novamente, será necessário aguardar uma nova tentativa e um eventual reembolso do banco destino para efetuar uma nova correção.\nVocê tem certeza que deseja processar seu saque para os dados informados?</p>"
+      )
+      .then((resp) => {
+        if (resp.buttonClicked === "ok") {
+          setLoading(true);
+          axios
+            .post("/bounce/" + order + "/" + token, {
+              branch: agency,
+              account,
+              bankIspb: bank.value,
+              accountType,
+            })
+            .then((res) => {
+              history.push("/" + partner + "/bounce_ok");
+            });
+        }
+      });
+  };
 
   return (
     <>
       <Header>
         <Container>
           <LogoContainer>
-            <img src={Logo} width={117} height={28} alt="Capitual logo" />
+            <img
+              src={Logo}
+              width={104.8}
+              height={28}
+              alt="Capitual logo"
+            />
 
             <Menu>
               <li>
@@ -117,34 +127,37 @@ function Bounces() {
             </Menu>
           </LogoContainer>
 
-          <img src={PartnerLogo} width={124} height={25} alt="" partner={partner} />
+          <img
+            src={PartnerLogo}
+            width={124}
+            height={25}
+            alt=""
+            partner={partner}
+          />
         </Container>
       </Header>
 
       <Body>
         <Box>
           <BoxContainer>
-            <LoadingOverlay
-              active={loading}
-              spinner
-            >
+            <LoadingOverlay active={loading} spinner>
               <h2>Verificação dos Dados para Saque</h2>
 
               <p>Preencha os campos abaixo com suas informações bancárias.</p>
 
               <Form onSubmit={() => {}} enctype="multipart/form-data">
-              { Boolean(name) && 
-                <>
-                  <p>Nome</p>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    disabled
-                  />
-                </>
-              }
+                {Boolean(name) && (
+                  <>
+                    <p>Nome</p>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      disabled
+                    />
+                  </>
+                )}
 
                 <p>Banco Destino</p>
                 <Select
@@ -152,20 +165,25 @@ function Bounces() {
                   value={bank}
                   onChange={setBank}
                   styles={{
-                    container: provided => ({
+                    container: (provided) => ({
                       ...provided,
-                      width: '100%',
-                      height: '50px',
-                      marginBottom: '20px'
+                      width: "100%",
+                      height: "50px",
+                      marginBottom: "20px",
                     }),
-                    control: provided => ({
+                    control: (provided) => ({
                       ...provided,
-                      height: '50px'
+                      height: "50px",
+                      borderRadius: "10px",
+                      borderWidth: "2px",
+                      borderColor: colors.plate,
                     }),
-                    valueContainer: provided => ({
+                    valueContainer: (provided) => ({
                       ...provided,
-                      height: '50px'
-                    })
+                      height: "50px",
+                      paddingLeft: "20px",
+                      paddingTop: "10px",
+                    }),
                   }}
                 />
 
@@ -265,6 +283,13 @@ function Bounces() {
           </BoxContainer>
         </Box>
       </Body>
+
+      <Footer>
+        <img src={Logo} width={104.8} height={28} alt="Capitual logo" />
+        <span>
+          Feito com <span className="heart">♥</span>para você
+        </span>
+      </Footer>
     </>
   );
 }

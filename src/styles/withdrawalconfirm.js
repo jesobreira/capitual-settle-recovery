@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { lighten, shade } from "polished";
 import colors from "~/styles/colors";
-
 export const Header = styled.div`
   display: flex;
   flex-direction: row;
@@ -33,6 +32,12 @@ export const LogoContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  
+  padding:5px;
+  
+  img{
+    margin:5px 0px;
+  }
 
   @media (max-width: 800px) {
     flex: 0.7;
@@ -98,6 +103,7 @@ export const BoxContainer = styled.div`
   border-radius: 20px;
   box-shadow: 24px 0px 75px 30px ${colors.gray};
   backdrop-filter: blur(3px);
+  margin: 40px;
 
   h2 {
     margin-top: 10px;
@@ -117,7 +123,6 @@ export const BoxContainer = styled.div`
 
 export const Form = styled.form`
   padding: 20px 0 20px 0;
-
   input {
     width: 100%;
     height: 50px;
@@ -130,7 +135,7 @@ export const Form = styled.form`
 
   input[type="text"],
   select {
-    padding-left: 30px;
+    padding-left: 20px;
 
     &:valid {
       border: 2px solid ${colors.darker};
@@ -139,13 +144,16 @@ export const Form = styled.form`
     &:invalid {
       border: 2px solid ${colors.plate};
     }
+    &:disabled {
+      border: 2px solid ${colors.plate};
+    }
 
     &:focus {
       border: 2px solid ${colors.blue};
     }
 
     @media (max-width: 490px) {
-      padding-left: 3px;
+      padding-left: 20px;
     }
   }
 
@@ -193,10 +201,38 @@ export const Button = styled.button`
   color: ${colors.white};
   padding: 20px;
   border-radius: 10px;
-  margin: 20px 5px 0 5px;
+  margin: 10px 0px 10px 0px;
   border: none;
 
   &:hover {
     background: ${shade(0.2, colors.blue)};
   }
 `;
+
+export const Footer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 90%;
+  height: 100px;
+  margin: 40px auto;
+  padding: 30px 0px;
+  border-top: 2px solid ${colors.plate};
+
+  span,
+  img {
+    @media (max-width: 490px) {
+      margin: 0px 10px;
+    }
+  }
+
+  .heart {
+    color: rgb(250, 100, 100);
+    font-size: 30px;
+    margin: 0px 3px;
+  }
+`;
+

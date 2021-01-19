@@ -17,6 +17,7 @@ export default createGlobalStyle`
 
   html, body, #root {
     height: 100%;
+    overflow-x: hidden;
   }
 
   #root {
@@ -87,6 +88,42 @@ export default createGlobalStyle`
 
   .react-tel-input .form-control {
     padding-left: 80px;
+  }
+
+  .alertify .alert>*, .alertify .dialog>*  {
+    border-radius:20px;
+  }
+
+  .alertify .dialog .msg,.alertify .dialog{
+   .title{
+      text-align:center;
+      font-weight:bold;
+      padding: 10px 10px;
+      font-size: 17px;
+    }
+    p{
+      padding:10px 20px;
+    }
+    nav{
+      padding: 0px 20px;
+      margin-bottom:20px;
+    }
+  }
+
+  .alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button) {
+    width: 100%;
+    background-color: #0f90ff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0px;
+    border: none;
+      &:hover {
+      background-color: rgba(15,144,255, 0.8);
+    }
+  }
+  .alertify .dialog nav button.cancel:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button){
+    background-color:#FF6378;
   }
 
 `;
