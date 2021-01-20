@@ -49,8 +49,8 @@ function Bounces() {
             value: res.data.data.bank.ISPB,
             label: res.data.data.bank.Code + " - " + res.data.data.bank.Name
           })
-          setAgency(res.data.data.branch)
-          setAccount(res.data.data.account)
+          //setAgency(res.data.data.branch)
+          //setAccount(res.data.data.account)
           setCpf(res.data.data.doc)
           setName(res.data.data.name)
         } else {
@@ -189,7 +189,7 @@ function Bounces() {
 
                 <Row>
                   <div>
-                    <p>Agência (sem dígito)</p>
+                    <p>Agência (<strong>sem</strong> dígito)</p>
                     <input
                       type="text"
                       value={agency}
@@ -199,7 +199,7 @@ function Bounces() {
                   </div>
 
                   <div>
-                    <p>Conta (com digito)</p>
+                    <p>Conta (<strong>com</strong> digito)</p>
                     <input
                       type="text"
                       value={account}
