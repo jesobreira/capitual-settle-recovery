@@ -32,6 +32,8 @@ function Bounces() {
   const [bank, setBank] = useState("");
   const [agency, setAgency] = useState("");
   const [account, setAccount] = useState("");
+  const [agencyOld, setAgencyOld] = useState("")
+  const [accountOld, setAccountOld] = useState("")
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
   const [accountType, setAccountType] = useState("checking");
@@ -49,8 +51,8 @@ function Bounces() {
             value: res.data.data.bank.ISPB,
             label: res.data.data.bank.Code + " - " + res.data.data.bank.Name
           })
-          //setAgency(res.data.data.branch)
-          //setAccount(res.data.data.account)
+          setAgencyOld(res.data.data.branch)
+          setAccountOld(res.data.data.account || "")
           setCpf(res.data.data.doc)
           setName(res.data.data.name)
         } else {
@@ -73,6 +75,15 @@ function Bounces() {
   };
 
   const handleSubmit = () => {
+
+    if (!agency) {
+      return alertify.error("Por favor, digite a agência, sem o dígito.")
+    }
+
+    if (!account) {
+      return alertify.error("Por favor, digite o número da sua conta com o dígito.")
+    }
+
     alertify
       .okBtn("Sim, processe o saque")
       .cancelBtn("Não, desejo conferir")
@@ -105,7 +116,7 @@ function Bounces() {
               src={Logo}
               width={104.8}
               height={28}
-              alt="Capitual logo"
+              alt="Capitual"
             />
 
             <Menu>
@@ -131,7 +142,7 @@ function Bounces() {
             src={PartnerLogo}
             width={124}
             height={25}
-            alt=""
+            alt={partner.substr(0, 1).toUpperCase() + partner.substr(1)}
             partner={partner}
           />
         </Container>
@@ -155,6 +166,7 @@ function Bounces() {
                       onChange={(e) => setName(e.target.value)}
                       required
                       disabled
+                      style={{ opacity: 0.5 }}
                     />
                   </>
                 )}
@@ -190,19 +202,23 @@ function Bounces() {
                 <Row>
                   <div>
                     <p>Agência (<strong>sem</strong> dígito)</p>
-                    <input
+                    <MaskedInput
+                      mask={[/[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/]}
                       type="text"
                       value={agency}
                       onChange={(e) => setAgency(e.target.value)}
                       required
+                      placeholder={agencyOld}
                     />
                   </div>
 
                   <div>
                     <p>Conta (<strong>com</strong> digito)</p>
-                    <input
+                    <MaskedInput
+                      mask={raw => [...Array.from(new Array(Math.min(raw.replace(/[^0-9]/g, '').length ? raw.replace(/[^0-9]/g, '').length-1 : 1, 11)), item => /[0-9]/), '-', /[0-9]/]}
                       type="text"
                       value={account}
+                      placeholder={accountOld.substr(0, accountOld.length-1) + '-' + accountOld.substr(accountOld.length-1)}
                       onChange={(e) => setAccount(e.target.value)}
                       required
                     />
@@ -220,7 +236,7 @@ function Bounces() {
                           checked={accountType === "checking"}
                           onChange={(e) => handleOptionChange(e)}
                         />
-                        Conta Corrente
+                        Conta Corrente<br/>ou de Pagamentos
                       </label>
                     </div>
                     <div className="radio">
@@ -246,6 +262,7 @@ function Bounces() {
                       onChange={(e) => setValue(e.target.value)}
                       required
                       disabled
+                      style={{ opacity: 0.5 }}
                     />
                   </div>
 
@@ -269,6 +286,7 @@ function Bounces() {
                         /\d/,
                       ]}
                       type="text"
+                      style={{ opacity: 0.5 }}
                       value={cpf}
                       onChange={(e) => setCpf(e.target.value)}
                       required
