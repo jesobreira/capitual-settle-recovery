@@ -76,7 +76,7 @@ function Bounces() {
 
   const handleSubmit = () => {
 
-    if (!agency) {
+    if (!agency || agency.includes('_') || !parseInt(agency)) {
       return alertify.error("Por favor, digite a agência, sem o dígito.")
     }
 
